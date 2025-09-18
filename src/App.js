@@ -10,14 +10,13 @@ function App() {
     <>
       <Head />
       <Routes>
-        <Route
-          path="/"
-          element={<Body />}
-          children={[
-             <Route index element={<MainContainer/>}/>,
-             <Route path ="watch" element={<WatchPage/>}/>
-          ]}
-        ></Route>
+                <Route path="/" element={<Body />}>
+          {/* Default (index) route */}
+          <Route index element={<MainContainer />} />
+          {/* Watch page */}
+          <Route path="watch" element={<WatchPage />} />
+        </Route>
+
       </Routes>
     </>
   );
