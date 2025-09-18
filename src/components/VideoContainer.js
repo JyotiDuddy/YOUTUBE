@@ -7,12 +7,23 @@ const VideoContainer = () => {
     useEffect(()=>{
      getVideos()
     },[])
-    const getVideos= async()=>{
-        const data = await fetch(YOUTUBE_VIDEO_API);
-        const res= await data.json();
-        console.log(res.items);
-        setVideos(res.items)
+   const getVideos = async () => {
+  try {
+    const data = await fetch(YOUTUBE_VIDEO_API);
+    const res = await data.json();
+    console.log(res);
+
+    if (res.items) {
+      setVideos(res.items);
+    } else {
+      console.error("YouTube API error:", res.error?.message || "Unknown error");
+      setVideos([]); // fallback to empty array
     }
+  } catch (error) {
+    console.error("Fetch failed:", error);
+    setVideos([]);
+  }
+};
   return (
     <div className='flex flex-wrap'>
       { videos[0] && <RedVideoCard info={videos[0]}/>}
